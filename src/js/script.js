@@ -28,3 +28,10 @@ console.log(texto3);
 //o join faz o inverso ,ele junta tudo em uma unica string
 const texto4 = texto1.join("*")
 console.log(texto4)
+
+//metodo tofixed
+const precoProduto=199.99;
+const desconto=0.15;
+const precoFinal=precoProduto *(1 - desconto)
+console.log(precoFinal)
+console.log(`R$ ${precoFinal.toFixed(2)}`)
