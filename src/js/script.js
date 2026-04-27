@@ -25,3 +25,6 @@ console.log(texto2);
 const texto3 =tituloArtigo.toUpperCase();
 console.log(texto3);
 
+//o join faz o inverso ,ele junta tudo em uma unica string
+const texto4 = texto1.join("*")
+console.log(texto4)
