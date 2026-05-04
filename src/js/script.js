@@ -1,70 +1,86 @@
-//metodo de limpeza e validação 
+//Método de limpeza e validação
 
-const email ="  fiap@email.com    ";
-const emaillimp = email.trim(); //remove espaços 
-console.log(emaillimp)
+const email ="   fiap@emailcom     ";
+const emailLimpo= email.trim(); //remove espaços (Inicio e fim)
+console.log(emailLimpo)
 
-//Validar: verifica se o dominio é valido
+//Validar: Verifica se o domínio é válido
 
-
-if(emaillimp.includes("@")){
+if(emailLimpo.includes("@")){
     console.log("email válido")
 }else{
-    console.log("Email Inválido")
+    console.log("email inválido")
 }
 
-//métodos de transformação de texto (split, tolowcase, join)
+//Métodos de transformação de texto (split, toLowCase,Join)
 
-const tituloartigo = "aprendendo javascript RAIZ";
-
-const texto1 = tituloartigo.toLowerCase();
+const tituloArtigo= "Aprendendo Javascript RAIZ DEV";
+//DEIXA O TEXTO EM MAIUSCULO OU MINUSCULO toLowCase
+const texto1 =tituloArtigo.toUpperCase();
 console.log(texto1);
+//tranforma um texto em array ou seja em uma lista
+const texto2 = tituloArtigo.split(" ");
+console.log(texto2)
 
-const texto1_upper = tituloartigo.toUpperCase();
-console.log(texto1_upper);
-
-//transforma um texto em array(lista)
-const texto2 = tituloartigo.split(" ");
-console.log(texto2);
-
-//o join faz o inverso, ele junta tudo em uma unica string
-const texto3 = texto2.join(" | ");
+//o join faz o inverso ele junta tudo em uma unica string
+const texto3 = texto2.join("*");
 console.log(texto3);
 
 //metodo tofixed
 
-const precoproduto = 199.99;
-const desconto = 0.15;
-const precofinal = precoproduto * (1 - desconto);
-console.log(precofinal);
-console.log(`R$ ${precofinal.toFixed(2)}`)
+const precoProduto=199.99;
+const desconto= 0.15; //15%
+const precoFinal = precoProduto * (1 - desconto);
+console.log(precoFinal);
+console.log(`R$ ${precoFinal.toFixed(2)}`)
 
-//Dom document object model
-// permite o javascript conversar com o navegador 
-//para manipular o html e css
+//DOM ( DOCUMENT OBJECT MODEL) MODELO DE DOCUMENTO
+//PERMITE O JAVASCRIPT CONVERSAR COM O NAVEGADOR
+//PARA MANIPULAR O HTML E CSS.
 
 const titulo = document.getElementById("titulo");
-titulo.innerText ="D.O.M transformando o texto";
+titulo.innerText ="Dom transformando o texto";
 titulo.style.color="blue";
 
-const produtos = [
-    {nome:"Teclado Gamer",preco:200,empromocao:true},
-    {nome:"Mouse Gamer",preco:150,empromocao:false},
-    {nome:"Monitor",preco:1300,empromocao:true},
-    {nome:"Padmouse",preco:50,empromocao:false},
+
+const produtos =[
+    {nome:"Teclado Gamer",preco:200,emPromocao:true},
+    {nome:"Mouse Gamer",preco:150,emPromocao:false},
+    {nome:"Monitor",preco:1300,emPromocao:true},
+    {nome:"Pad Mouse",preco:50,emPromocao:false},
 ];
 
-const container =document.getElementById("lista-produtos");
+console.log(produtos)
+const container=document.getElementById("lista-produtos");
+const mostrarTotal = document.getElementById("resultado-total")
 
-function produtoscard(lista){
-    const htmlprodutos= lista.map(item => ` 
+function produtosCard(lista){
+     mostrarTotal.innerText="";
+    const htmlProdutos= lista.map(item => `
         <div class="card">
-            <h3>${item.nome}</h3> 
+            <h3>${item.nome}</h3>
             <p>Preço R$ ${item.preco}</p>
-            ${item.empromocao ? '<span>Promoção</span>': ''}
+            ${item.emPromocao ? '<span>Promoção</span>': ''}
         </div>
         `).join('');//transforma o array em uma unica string
 
-        container.innerHTML=htmlprodutos;
+        container.innerHTML=htmlProdutos;
 }
-produtoscard(produtos);
+
+
+//FILTER - CRIA UMA NOVA LISTA APENAS COM O QUE PESQUISAR
+
+function filtrarPromocoes(){
+    const promocionais = produtos.filter(item => item.emPromocao);
+    produtosCard(promocionais);
+}
+
+//REDUCE - Reduz o array em um unico valor(soma de preços)
+
+function calcularTotal(){
+    const total = produtos.reduce((acumulador,item)=>{
+        return acumulador + item.preco;
+    },0);
+    mostrarTotal.innerText =`Valor Total R$ ${total}`;
+}
+
